@@ -112,5 +112,5 @@ namespace StateMachineTests
             Assert.IsTrue(actionHasBeenExecuted);
             Assert.AreEqual(MachineState.Idle, stateMachine.CurrentState);
         }
-    }
+    } 
 }
