@@ -4,14 +4,20 @@ Example: Car simualtion
 
 **First, we need to define the possible car states that we are interested to simulate. This can differ from case to case.**
   
+  ```
   public enum CarState { Off, On, Start, Drive, Stop }
-
+  
+  ```
+  
 **Second, we need to define events that will trigger certain state transitions. For this case, we have chosen the following ones.**
   
+  ```
   public enum CarStateEvent { TurnOn, TurnOff, Acceleerate, Break }
-
+  ```
+  
 **The CarSimulator class is the acutal simulator that can be used to wrap up the state machine and privide a way to control the class states in a simple way.**
 
+```
   public class CarSimulator
   {
     private StateMachine<CarState, CarStateEvent> _stateMachine;
@@ -57,3 +63,5 @@ Example: Car simualtion
             _stateMachine.HandleEvent(CarStateEvent.Break);
         }
     }
+
+```
