@@ -15,7 +15,11 @@ jobs:
         dotnet-version: 2.2.108
     - name: Build with dotnet
       run: dotnet build --configuration Release
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Nuget push
-      run: nuget push *.nupkg
+      shell: bash
+    - name: Publish nuget
+      run: |
+           for f in ./[repository]/bin/Release/*.nupkg
+           do
+             curl -vX PUT -u "MeatDuckXp:${{ secrets.GHPackagesToken }}" -F package=@$f https://nuget.pkg.github.com/MeatDuckXp/
+           done
+      shell: bash
