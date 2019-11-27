@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace StateMachine
 {
     /// <summary>
-    /// Simmple state machine implementation. Uses list as container to store the state transitions.
+    ///     Simmple state machine implementation. Uses list as container to store the state transitions.
     /// </summary>
-    /// <typeparam name="StateType">Type of known states</typeparam>
-    /// <typeparam name="EventType">Type of known events</typeparam>
+    /// <typeparam name="StateType">Type of known states.</typeparam>
+    /// <typeparam name="EventType">Type of known events.</typeparam>
     public class StateMachine<StateType, EventType> : IStateMachine<StateType, EventType>
     {
         #region Fields
@@ -15,27 +15,27 @@ namespace StateMachine
         #endregion
 
         /// <summary>
-        /// State changed event
+        ///     State changed event
         /// </summary>
         public event StateChangedHandler<StateType> StateChanged;
 
         /// <summary>
-        /// Gets current state
+        ///     Gets current state
         /// </summary>
         public StateType CurrentState { get; private set; }
 
         /// <summary>
-        /// Gets initial state
+        ///     Gets initial state
         /// </summary>
         public StateType InitialState { get; private set; }
 
         /// <summary>
-        /// Gets transitions count
+        ///     Gets transitions count
         /// </summary>
         public int TransitionCount => _transitions.Count;
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="initialState">Initial state value</param>
         public StateMachine(StateType initialState)
@@ -46,7 +46,7 @@ namespace StateMachine
         }
 
         /// <summary>
-        /// Creates new instance of state change transition
+        ///     Creates new instance of state change transition
         /// </summary>
         /// <param name="startState">Start state</param>
         /// <param name="transitionEvent">Event</param>
@@ -59,7 +59,7 @@ namespace StateMachine
         }
 
         /// <summary>
-        /// Creates new instance of state change transition
+        ///     Creates new instance of state change transition
         /// </summary>
         /// <param name="newTransition">StateTransition</param>
         public void AddTransition(StateTransition<StateType, EventType> newTransition)
@@ -73,7 +73,7 @@ namespace StateMachine
         }
 
         /// <summary>
-        /// Resets state machine to initial state
+        ///     Resets state machine to initial state
         /// </summary>
         public void Reset()
         {
@@ -81,7 +81,7 @@ namespace StateMachine
         }
 
         /// <summary>
-        /// Resets state machine to the new state
+        ///     Resets state machine to the new state
         /// </summary>
         /// <param name="newState">New State</param>
         public void Reset(StateType newState)
@@ -90,7 +90,7 @@ namespace StateMachine
         }
 
         /// <summary>
-        /// Handles transition event 
+        ///     Handles transition event 
         /// </summary>
         /// <param name="transitionEvent">Transition event</param>
         public void HandleEvent(EventType transitionEvent)
