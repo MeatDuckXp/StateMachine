@@ -1,8 +1,10 @@
 ![Category overview screenshot](docs/images/logo2.png "machinesy")
 
-# machinesy - Simple finite state machine in c#
+# machinesy
+
+Simple finite state machine in c#
  
-Example: Car simualtion
+# Example Usage: Car simualtion
 
 **First, we need to define the possible car states that we are interested to simulate. This can differ from case to case.**
   
@@ -67,3 +69,12 @@ Example: Car simualtion
     }
 
 ```
+
+# Build Status
+
+|**master**|
+|--|
+[![Build status](https://ci.appveyor.com/api/projects/status/fxd6ytfb4fq7ow7t/branch/master?svg=true)](https://ci.appveyor.com/project/MeatDuckXp/machinesy/branch/master)
+ 
+# Contributing
+This project welcomes contributions and suggestions. 
