@@ -1,4 +1,6 @@
-# StateMachine - Simple finite state machine in c#
+![Category overview screenshot](docs/images/logo2.png "machinesy")
+
+# machinesy - Simple finite state machine in c#
  
 Example: Car simualtion
 
