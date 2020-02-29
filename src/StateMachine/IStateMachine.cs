@@ -58,6 +58,6 @@
         ///     Handles transition event 
         /// </summary>
         /// <param name="transitionEvent">Transition event</param>
-        void HandleEvent(EventType gameEvent);
+        void HandleEvent(EventType transitionEvent);
     }
 }

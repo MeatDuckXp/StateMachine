@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>TinyStateMachine</PackageId>
+    <Description>Simple finite state machine that can be used for games, services and other programs that require complex state management.</Description>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Professor Balthazar</Authors>
+    <Company />
+    <Product>TinyStateMachine</Product>
+    <PackageProjectUrl>https://github.com/MeatDuckXp/StateMachine</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MeatDuckXp/StateMachine</RepositoryUrl>
+    <PackageTags>state machine, tiny, tinystatemachine, state-machine, state, machine, finite</PackageTags>
+    <Copyright>Copyright 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>
