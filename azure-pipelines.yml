@@ -33,13 +33,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     includesymbols: true
-    versioningScheme: 'off'
+    versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
   inputs:
