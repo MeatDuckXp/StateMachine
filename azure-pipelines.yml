@@ -39,7 +39,10 @@ steps:
     packagesToPack: '**/*.csproj'
     nobuild: true
     includesymbols: true
-    versioningScheme: 'off'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '0'
 
 - task: NuGetCommand@2
   inputs:
@@ -47,3 +50,5 @@ steps:
      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
      nuGetFeedType: 'external'
      publishFeedCredentials: 'Nuget.org'
+
+
