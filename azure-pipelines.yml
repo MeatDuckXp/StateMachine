@@ -6,6 +6,8 @@
 trigger:
 - master
 
+name: 1.0.$(rev:.r)
+
 pool:
   vmImage: 'windows-latest'
 
@@ -39,10 +41,7 @@ steps:
     packagesToPack: '**/*.csproj'
     nobuild: true
     includesymbols: true
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
+    versioningScheme: 'off' 
 
 - task: NuGetCommand@2
   inputs:
@@ -50,5 +49,4 @@ steps:
      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
      nuGetFeedType: 'external'
      publishFeedCredentials: 'Nuget.org'
-
 
