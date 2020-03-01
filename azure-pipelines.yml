@@ -5,7 +5,7 @@
 
 #name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
 
-name: 1.0.$(rev:.r)
+name: $(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r).
 
 pool:
   vmImage: 'windows-latest'
@@ -19,7 +19,7 @@ variables:
   # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
   # semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
 
-  BUILD_BUILDNUMBER : 1.0.$(rev:.r)
+  #BUILD_BUILDNUMBER : 1.0.$(rev:.r)
 
 # Only run against master
 trigger:
@@ -44,15 +44,14 @@ steps:
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
- 
- # Package
+
+# Package
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    nobuild: true
-    versioningScheme: byBuildNumber # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
+    versioningScheme: 'byBuildNumber'
+    configuration: '$(buildConfiguration)'
 
 # Publish
 - task: NuGetCommand@2
