@@ -17,9 +17,7 @@ variables:
   # majorMinorVersion: 1.0
   # semanticVersion counter is automatically incremented by one in each execution of pipeline
   # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
-  # semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
-
-  #BUILD_BUILDNUMBER : 1.0.$(rev:.r)
+  # semanticVersion: $[counter(variables['majorMinorVersion'], 0)] 
 
 # Only run against master
 trigger:
@@ -32,13 +30,26 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Generating Build Number"
+      $baseDate = [datetime]"01/01/2000"
+      $currentDate = $(Get-Date)
+      $interval = NEW-TIMESPAN –Start $baseDate –End $currentDate
+      $days = $interval.Days
+      
+      Write-Host "##vso[task.setvariable variable=buildNumber]10.0.$days.1024"
+
+
 # Build
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    configuration: '$(buildConfiguration)/p:Version=$(buildNumber)' 
 
 # Test
 - task: VSTest@2
@@ -53,7 +64,6 @@ steps:
     nobuild: true
     includesymbols: true
     versioningScheme: 'byBuildNumber'
-
 
 # Publish
 - task: NuGetCommand@2
