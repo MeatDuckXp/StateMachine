@@ -5,7 +5,7 @@
 
 #name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
 
-name: $(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r).
+name: 1.0.$(rev:.r)
 
 pool:
   vmImage: 'windows-latest'
@@ -50,8 +50,10 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    nobuild: true
+    includesymbols: true
     versioningScheme: 'byBuildNumber'
-    configuration: '$(buildConfiguration)'
+
 
 # Publish
 - task: NuGetCommand@2
