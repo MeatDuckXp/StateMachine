@@ -42,7 +42,6 @@ steps:
       
       Write-Host "##vso[task.setvariable variable=buildNumber]10.0.$days.1024"
 
-
 # Build
 - task: VSBuild@1
   inputs:
@@ -61,8 +60,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    nobuild: true
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: 'off'
     buildProperties: '/p:Version=$(buildNumber)'
 
 # Publish
@@ -72,6 +70,3 @@ steps:
      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
      nuGetFeedType: 'external'
      publishFeedCredentials: 'Nuget.org'
-
-
-
