@@ -4,9 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 #name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
-
-name: 1.0.$(rev:.r)
-
+ 
 pool:
   vmImage: 'windows-latest'
 
@@ -14,10 +12,6 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  # majorMinorVersion: 1.0
-  # semanticVersion counter is automatically incremented by one in each execution of pipeline
-  # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
-  # semanticVersion: $[counter(variables['majorMinorVersion'], 0)] 
 
 # Only run against master
 trigger:
@@ -30,23 +24,11 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Generating Build Number"
-      $baseDate = [datetime]"01/01/2000"
-      $currentDate = $(Get-Date)
-      $interval = NEW-TIMESPAN –Start $baseDate –End $currentDate
-      $days = $interval.Days
-      
-      Write-Host "##vso[task.setvariable variable=buildNumber]10.0.$days.1024"
-
 # Build
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:Version=$(buildNumber) /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)' 
 
@@ -60,7 +42,12 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    versioningScheme: 'off'
+    nobuild: true
+    includesymbols: true
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '2'
+    minorVersion: '1'
+    patchVersion: '0'
 
 # Publish
 - task: NuGetCommand@2
