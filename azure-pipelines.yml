@@ -61,7 +61,6 @@ steps:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
-    buildProperties: '/p:Version=$(buildNumber)'
 
 # Publish
 - task: NuGetCommand@2
