@@ -74,7 +74,7 @@ Simple finite state machine in c#
 
 |**master**|
 |--|
-[![Build status](https://ci.appveyor.com/api/projects/status/fxd6ytfb4fq7ow7t/branch/master?svg=true)](https://ci.appveyor.com/project/MeatDuckXp/machinesy/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/cj86pjq1t3j0kfnp/branch/master?svg=true)](https://ci.appveyor.com/project/MeatDuckXp/machinesy/branch/master)
  
 # Contributing
 This project welcomes contributions and suggestions. 
